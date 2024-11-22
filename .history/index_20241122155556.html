@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arcade Games Collection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .available {
+            background: #4CAF50;
+        }
+
+        .coming-soon {
+            background: #ff9800;
+        }
+
+        .screen {
+            display: none;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .name-input {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            margin: 20px;
+            width: 300px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .start-button {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .start-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+        <h1>Welcome to Arcade Games</h1>
+        <input type="text" class="name-input" placeholder="Enter your name" id="playerName">
+        <br>
+        <button class="start-button" onclick="startGameSelection()">Start Playing</button>
+    </div>
+
+    <!-- Game Selection Screen -->
+    <div id="gameSelection" class="screen">
+        <h1>Welcome, <span id="playerNameDisplay"></span>!</h1>
+        <div class="games-grid">
+            <div class="game-card" onclick="startGame('snake')">
+                <h2>Snake Game</h2>
+                <p>Classic snake game with modern graphics</p>
+                <span class="status-badge available">Available</span>
+            </div>
+            
+            <div class="game-card">
+                <h2>Tetris</h2>
+                <p>The classic block-stacking puzzle game</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="game-card">
+                <h2>Pac-Man</h2>
+                <p>Navigate through the maze, eat dots, avoid ghosts</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="game-card">
+                <h2>Space Invaders</h2>
+                <p>Defend Earth from alien invasion</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPlayer = '';
+
+        function startGameSelection() {
+            const name = document.getElementById('playerName').value.trim();
+            if (name) {
+                currentPlayer = name;
+                document.getElementById('playerNameDisplay').textContent = name;
+                switchScreen('gameSelection');
+            } else {
+                alert('Please enter your name!');
+            }
+        }
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function startGame(gameType) {
+            if (gameType === 'snake') {
+                window.location.href = `games/${gameType}/${gameType}.html?player=${encodeURIComponent(currentPlayer)}`;
+            } else {
+                alert('This game is coming soon!');
+            }
+        }
+    </script>
+</body>
+</html>

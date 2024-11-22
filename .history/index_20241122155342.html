@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arcade Games Collection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            /* backdrop-filter: blur(5px); */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .available {
+            background: #4CAF50;
+        }
+
+        .coming-soon {
+            background: #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arcade Games Collection</h1>
+        <div class="games-grid">
+            <div class="game-card" onclick="startGame('snake')">
+                <h2>Snake Game</h2>
+                <p>Classic snake game with modern graphics</p>
+                <span class="status-badge available">Available</span>
+            </div>
+            
+            <div class="game-card">
+                <h2>Tetris</h2>
+                <p>The classic block-stacking puzzle game</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="game-card">
+                <h2>Pac-Man</h2>
+                <p>Navigate through the maze, eat dots, avoid ghosts</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="game-card">
+                <h2>Space Invaders</h2>
+                <p>Defend Earth from alien invasion</p>
+                <span class="status-badge coming-soon">Coming Soon</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startGame(gameType) {
+            if (gameType === 'snake') {
+                window.location.href = `games/${gameType}/${gameType}.html`;
+            } else {
+                alert('This game is coming soon!');
+            }
+        }
+    </script>
+</body>
+</html>

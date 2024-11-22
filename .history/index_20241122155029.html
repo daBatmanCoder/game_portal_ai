@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arcade Games Collection</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+        <h1>Welcome to Arcade Games</h1>
+        <input type="text" class="name-input" placeholder="Enter your name" id="playerName">
+        <button class="button" onclick="startGameSelection()">Start Playing</button>
+    </div>
+
+    <!-- Game Selection Screen -->
+    <div id="gameSelection" class="screen">
+        <h2>Welcome, <span id="playerNameDisplay"></span>!</h2>
+        <div class="carousel">
+            <button class="carousel-btn" onclick="moveCarousel(-1)">❮</button>
+            <div class="game-card" onclick="startGame('snake')">
+                <img src="games/snake/assets/preview.png" alt="Snake Game">
+                <h3>Snake Game</h3>
+                <p>Classic snake game with modern graphics</p>
+            </div>
+            <!-- ... other game cards with updated image paths ... -->
+            <button class="carousel-btn" onclick="moveCarousel(1)">❯</button>
+        </div>
+    </div>
+
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

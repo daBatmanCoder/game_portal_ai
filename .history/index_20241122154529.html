@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Arcade Games Collection</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+        }
+
+        .screen {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        /* Welcome Screen */
+        #welcomeScreen {
+            background: linear-gradient(45deg, #1a237e, #311b92);
+        }
+
+        #welcomeScreen h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .name-input {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            border: none;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 300px;
+        }
+
+        /* Game Selection Screen */
+        #gameSelection {
+            background: linear-gradient(45deg, #1a237e, #311b92);
+        }
+
+        .carousel {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .game-card {
+            width: 300px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .carousel-btn {
+            font-size: 2em;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .button {
+            padding: 10px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #45a049;
+        }
+
+        /* Game Screen */
+        #gameScreen {
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="screen active">
+        <h1>Welcome to Arcade Games</h1>
+        <input type="text" class="name-input" placeholder="Enter your name" id="playerName">
+        <button class="button" onclick="startGameSelection()">Start Playing</button>
+    </div>
+
+    <!-- Game Selection Screen -->
+    <div id="gameSelection" class="screen">
+        <h2>Welcome, <span id="playerNameDisplay"></span>!</h2>
+        <div class="carousel">
+            <button class="carousel-btn" onclick="moveCarousel(-1)">❮</button>
+            <div class="game-card" onclick="startGame('snake')">
+                <img src="snake-preview.png" alt="Snake Game">
+                <h3>Snake Game</h3>
+                <p>Classic snake game with modern graphics</p>
+            </div>
+            <div class="game-card" onclick="startGame('tetris')">
+                <img src="tetris-preview.png" alt="Tetris">
+                <h3>Tetris</h3>
+                <p>Coming Soon!</p>
+            </div>
+            <div class="game-card" onclick="startGame('pacman')">
+                <img src="pacman-preview.png" alt="Pacman">
+                <h3>Pacman</h3>
+                <p>Coming Soon!</p>
+            </div>
+            <div class="game-card" onclick="startGame('breakout')">
+                <img src="breakout-preview.png" alt="Breakout">
+                <h3>Breakout</h3>
+                <p>Coming Soon!</p>
+            </div>
+            <div class="game-card" onclick="startGame('pong')">
+                <img src="pong-preview.png" alt="Pong">
+                <h3>Pong</h3>
+                <p>Coming Soon!</p>
+            </div>
+            <button class="carousel-btn" onclick="moveCarousel(1)">❯</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <canvas id="gameCanvas"></canvas>
+        <button class="button" onclick="backToSelection()">Back to Games</button>
+    </div>
+
+    <script>
+        let currentPlayer = '';
+        let currentGameIndex = 0;
+        const games = document.querySelectorAll('.game-card');
+
+        function startGameSelection() {
+            const name = document.getElementById('playerName').value.trim();
+            if (name) {
+                currentPlayer = name;
+                document.getElementById('playerNameDisplay').textContent = name;
+                switchScreen('gameSelection');
+            } else {
+                alert('Please enter your name!');
+            }
+        }
+
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function moveCarousel(direction) {
+            const totalGames = games.length;
+            currentGameIndex = (currentGameIndex + direction + totalGames) % totalGames;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            games.forEach((game, index) => {
+                const offset = index - currentGameIndex;
+                game.style.transform = `translateX(${offset * 320}px)`;
+                game.style.opacity = Math.abs(offset) <= 1 ? '1' : '0.5';
+            });
+        }
+
+        function startGame(gameType) {
+            if (gameType === 'snake') {
+                switchScreen('gameScreen');
+                initSnakeGame(); // Your existing snake game initialization
+            } else {
+                alert('Game coming soon!');
+            }
+        }
+
+        function backToSelection() {
+            switchScreen('gameSelection');
+        }
+    </script>
+    <script src="snake.js"></script>
+</body>
+</html> 
