@@ -204,11 +204,11 @@
             
             <div class="game-card" onclick="startGame('tetris')">
                 <div class="game-icon">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIxIDZWNUgyMFY2SDIxTTIxIDlWOEgyMFY5SDIxTTE4IDhWNUgxN1Y4SDE4TTIxIDEyVjExSDIwVjEySDIxTTE4IDExVjEwSDE3VjExSDE4TTE4IDE0VjEzSDE3VjE0SDE4TTE4IDE3VjE2SDE3VjE3SDE4TTIxIDE1VjE0SDIwVjE1SDIxTTIxIDE4VjE3SDIwVjE4SDIxTTIxIDIxVjIwSDIwVjIxSDIxTTE4IDIwVjE5SDE3VjIwSDE4TTE1IDIwVjE5SDE0VjIwSDE1TTEyIDIwVjE5SDExVjIwSDEyTTkgMjBWMTlIOFYyMEg5TTYgMjBWMTlINVYyMEg2TTMgMjBWMTlIMlYyMEgzTTMgMTdWMTZIMlYxN0gzTTMgMTRWMTNIMlYxNEgzTTMgMTFWMTBIMlYxMUgzTTMgOFY3SDJWOEgzTTMgNVY0SDJWNUgzTTYgNVY0SDVWNUg2TTkgNVY0SDhWNUg5TTEyIDVWNEgxMVY1SDEyTTE1IDVWNEgxNFY1SDE1TTMgMlYxSDJWMkgzTTYgMlYxSDVWMkg2TTkgMlYxSDhWMkg5TTEyIDJWMUgxMVYySDEyTTE1IDJWMUgxNFYySDEyTTE4IDJWMUgxN1YySDEyTTIxIDNWMkgyMFYzSDIxWiIgLz48L3N2Zz4=" alt="Tetris">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIxIDZWNUgyMFY2SDIxTTIxIDlWOEgyMFY5SDIxTTE4IDhWNUgxN1Y4SDE4TTIxIDEyVjExSDIwVjEySDIxTTE4IDExVjEwSDE3VjExSDE4TTE4IDE0VjEzSDE3VjE0SDE4TTE4IDE3VjE2SDE3VjE3SDE4TTIxIDE1VjE0SDIwVjE1SDIxTTIxIDE4VjE3SDIwVjE4SDIxTTIxIDIxVjIwSDIwVjIxSDIxTTE4IDIwVjE5SDE3VjIwSDE4TTE1IDIwVjE5SDE0VjIwSDE1TTEyIDIwVjE5SDExVjIwSDEyTTkgMjBWMTlIOFYyMEg5TTYgMjBWMTlINVYyMEg2TTMgMjBWMTlIMlYyMEgzTTMgMTdWMTZIMlYxN0gzTTMgMTRWMTNIMlYxNEgzTTMgMTFWMTBIMlYxMUgzTTMgOFY3SDJWOEgzTTMgNVY0SDJWNUgzTTYgNVY0SDVWNUg2TTkgNVY0SDhWNUg5TTEyIDVWNEgxMVY1SDEyTTE1IDVWNEgxNFY1SDE1TTMgMlYxSDJWMkg2TTYgMlYxSDVWMkg2TTkgMlYxSDhWMkg5TTEyIDJWMUgxMVYySDEyTTE1IDJWMUgxNFYySDEyTTE4IDJWMUgxN1YySDEyTTIxIDNWMkgyMFYzSDIxWiIgLz48L3N2Zz4=" alt="Tetris">
                 </div>
                 <h2>Tetris</h2>
                 <p>The classic block-stacking puzzle game</p>
-                <span class="status-badge coming-soon">Coming Soon</span>
+                <span class="status-badge available">Available</span>
             </div>
 
             <div class="game-card">
@@ -265,7 +265,8 @@
         }
 
         function startGame(gameType) {
-            if (gameType === 'snake') {
+            localStorage.setItem('playerName', currentPlayer);
+            if (gameType === 'snake' || gameType === 'tetris') {
                 window.location.href = `games/${gameType}/${gameType}.html?player=${encodeURIComponent(currentPlayer)}`;
             } else {
                 window.location.href = 'games/coming-soon.html';
