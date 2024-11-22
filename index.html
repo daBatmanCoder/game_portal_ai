@@ -211,13 +211,13 @@
                 <span class="status-badge available">Available</span>
             </div>
 
-            <div class="game-card">
+            <div class="game-card" onclick="startGame('pacman')">
                 <div class="game-icon">
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLDEyTDEyLDEyQzEwLjMsMTIgOSwxMC43IDksOUg2QzYsOS43IDYuMSwxMC40IDYuNCwxMUg0LjVDNC44LDEyLjQgNS41LDEzLjcgNi41LDE0LjlMMTIsMjFMMTcuNSwxNC45QzE4LjUsMTMuNyAxOS4yLDEyLjQgMTkuNSwxMUgxNy42QzE3LjksMTAuNCAxOCw5LjcgMTgsOUgxNUMxNSwxMC43IDEzLjcsMTIgMTIsMTJNMTIsOUMxMi42LDkgMTMsOC42IDEzLDhDMTMsNy40IDEyLjYsNyAxMiw3QzExLjQsNyAxMSw3LjQgMTEsOEMxMSw4LjYgMTEuNCw5IDEyLDlaIiAvPjwvc3ZnPg==" alt="Pac-Man">
                 </div>
                 <h2>Pac-Man</h2>
                 <p>Navigate through the maze, eat dots, avoid ghosts</p>
-                <span class="status-badge coming-soon">Coming Soon</span>
+                <span class="status-badge available">Available</span>
             </div>
 
             <div class="game-card">
@@ -266,7 +266,7 @@
 
         function startGame(gameType) {
             localStorage.setItem('playerName', currentPlayer);
-            if (gameType === 'snake' || gameType === 'tetris') {
+            if (gameType === 'snake' || gameType === 'tetris' || gameType === 'pacman') {
                 window.location.href = `games/${gameType}/${gameType}.html?player=${encodeURIComponent(currentPlayer)}`;
             } else {
                 window.location.href = 'games/coming-soon.html';
